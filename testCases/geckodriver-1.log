@@ -1,0 +1,18 @@
+1738087344021	geckodriver	INFO	Listening on 127.0.0.1:59828
+1738087347085	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "59829" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\HP\\AppData\\Local\\Temp\\rust_mozprofileSNe9cL"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+Dynamically enable window occlusion 0
+1738087347716	Marionette	INFO	Marionette enabled
+1738087347943	Marionette	INFO	Listening on port 59843
+WebDriver BiDi listening on ws://127.0.0.1:59829
+Read port: 59843
+1738087348204	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:59829/devtools/browser/40097c39-6ef5-4ceb-afd8-1297cdf0dccc
+JavaScript warning: moz-extension://fa6f6508-d63d-42e3-a9f9-c4b454a78e5c/Agent/Content/Recorder.js, line 92: Script terminated by timeout at:
+_handlerFunc@moz-extension://fa6f6508-d63d-42e3-a9f9-c4b454a78e5c/Agent/Content/Recorder.js:92:5
+
+1738087354425	Marionette	INFO	Stopped listening on port 59843
+JavaScript error: resource://gre/modules/ConduitsChild.sys.mjs, line 199: Error: PortDisconnect for closed conduit 962072674307: ({portId:962072674306, source:true, error:null})
+JavaScript error: resource://gre/modules/ConduitsChild.sys.mjs, line 199: Error: PortDisconnect for closed conduit 962072674311: ({portId:962072674310, source:true, error:null})
+Dynamically enable window occlusion 1
