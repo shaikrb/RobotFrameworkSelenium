@@ -67,3 +67,51 @@ Example ```Open Browser  \${Browser}  ${URL}```
 
 *** Keywords ***\
 To write any user defined keywords
+
+## Element Locator
+
+Locators are used to locate any element uniquely on a web page.
+
+CSS Selectors:
+
+By ID
+```
+css=#email       //Without using any html tag
+css=input#email  //With html tag
+```
+
+By Class
+```
+css=input.inputtext
+```
+By any other attribute
+```
+css=tag[attributeName='Value']
+```
+Tag can be optional or * to denote any tag
+
+By Combination
+```
+css=tag#id[attribute='Value']
+css=tag.class[attribute='Value']
+```
+
+XPath Selectors:
+
+By attribute
+```
+//tag[@attribute='Value']    // Single attribute
+//tag[@attribute1='Value1' or @attribute2='Value2'] //Multiple attributes with OR
+//tag[@attribute1='Value1' and @attribute2='Value2'] //Multiple attributes with AND
+//*[@attribute='Value'] //Any tag with given attribute
+//tag[@*='Value'] //Tag with any attribute with value
+//tag[contains(@attribute,'Value')]
+```
+
+Using text
+```
+//tag[text()='Value']
+//tag[contains(text(), 'Value')]
+```
+Using xpath axes to locate using hierarchy i.e. parent, grandparent, children etc
+
