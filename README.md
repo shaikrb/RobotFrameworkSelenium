@@ -115,3 +115,68 @@ Using text
 ```
 Using xpath axes to locate using hierarchy i.e. parent, grandparent, children etc
 
+## Keywords
+
+Reference - https://robotframework.org/SeleniumLibrary/SeleniumLibrary.html
+
+Generic syntax for any Robot statement is
+
+<Keyword>  <arg1>  <arg2>
+
+There should be 2 spaces between keyword and arg, arg and arg.
+Most of the keywords are more than 1 word. Below are the most commonly used keywords in Selenium library.
+
+Locator syntax is slightly different than what we usually use.\
+It is like \<attribute>:\<value>
+
+Example:
+
+Input Text  id:engineperformance  1.5BHP
+
+```
+    Open Browser  ${URL}  ${Browser}
+    Input Text  <locator>  <value>
+    Click Link  <locator>
+    Maximize Browser Window
+    Clear Element Text  <locator>
+    Select Radio Button  <group>  <value>
+    Select Checkbox  <locator>
+    Click Button  <locator>
+    Select From List By Index  <locator>  <index value>   //It is zero indexed
+    Select From List By Value  <locator>  <value>
+    Select From List By Label  <locator>  <visibla label>
+    Set Selenium Speed  <time>  //Adds waits after each step. Example 2seconds
+    
+```
+
+## User defined keywords
+
+We can define keywords for making steps reusable (similar to methods). Below is one example of keywords defined with arguments.
+
+```
+*** Settings ***
+Library  SeleniumLibrary
+
+*** Variables ***
+${Browser}  Chrome
+${URL}  https://thetestingworld.com/testings/
+
+*** Test Cases ***
+TC_OO1_BROWSER_START_AND_CLOSE
+    Open Browser  ${URL}  ${Browser}
+    Maximize Browser Window
+    Set Selenium Speed  1 second
+    Enter Details  testing  testing@xyz.com  abc123xyz
+    #Click Link  id:nav_camper
+    #Input Text  id:engineperformance  1.5BHP
+    #Select Radio Button  Right Hand Drive  No
+    #Click Element  xpath://label[normalize-space()='No']
+    Close Browser
+
+*** Keywords ***
+Enter Details
+    [Arguments]  ${userName}  ${email}  ${password}
+    Input Text  name:fld_username  ${userName}
+    Input Text  name:fld_email  ${email}
+    Input Text  name:fld_password  ${password}
+```
