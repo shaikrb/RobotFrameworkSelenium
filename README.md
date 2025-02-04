@@ -180,3 +180,61 @@ Enter Details
     Input Text  name:fld_email  ${email}
     Input Text  name:fld_password  ${password}
 ```
+### Define and print variables:
+
+**set variable** keyword is used to set the variable inside testcase section
+**log to console** keyword is used to print the variable
+
+```
+${var}=     set variable  Hello world  //tab after = and 2 spaces after keyword
+log to console  ${var}                  // 2 spaces after keyword
+```
+
+### Define and use a list:
+
+List is part of standard library **Collection**
+
+```
+    ${var}=     set variable  Hello World
+    ${list}=    create list     Hello   world   22  23.23
+    ${listLength}   get length  ${list}
+    ${listData}=    get from list  ${list}  1       //List is zero indexed
+    log to console  ${var}
+    log to console  ${listLength}
+    log to console  ${listData}
+```
+
+### For loop:
+
+```
+    FOR   ${i}    IN RANGE    1   10
+    log to console  ${i}
+    END
+```
+
+Iterating through a list
+
+```
+    ${list}=    create list     Hello   world   22  23.23
+    FOR     ${i}  IN  @{list}
+    log to console  ${i}
+    END
+```
+
+### RUN Keyword conditionally:
+
+We can store the keywords in the variable and run them using **run keyword** keyword
+
+```
+    ${key_word}=  set variable  log to console
+    run keyword  ${key_word}  Hello Rasool
+```
+
+We can also conditionally run a keyword by passing a condition for keyword **run keyword if**
+
+```
+    ${key_word}=  set variable  log to console
+    run keyword  ${key_word}  Hello Rasool
+    ${condition}=  set variable  YES
+    run keyword if  '${condition}'=='YES'  log to console  It is yes
+```
