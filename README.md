@@ -238,3 +238,130 @@ We can also conditionally run a keyword by passing a condition for keyword **run
     ${condition}=  set variable  YES
     run keyword if  '${condition}'=='YES'  log to console  It is yes
 ```
+
+### Set and Get selenium speed:
+
+Selenium speed is used to set the wait time between each selenium step following this instruction
+
+```
+    Open Browser  ${URL}  ${Browser}
+    Maximize Browser Window
+    Set Selenium Speed  1 second                        //Waits for 1 second after selenium step following this
+    Click Link  id:nav_camper
+    Input Text  id:engineperformance  1.5BHP
+    Select Radio Button  Right Hand Drive  No
+    Click Element  xpath://label[normalize-space()='No']
+    Close Browser
+```
+
+Set Selenium Speed - to set the selenium speed
+Get Selenium Speed - TO get the set selenium speed
+
+Sleep keyword is used to wait in only one step
+
+```
+    Open Browser  ${URL}  ${Browser}
+    Maximize Browser Window
+    sleep  1 second                        //Waits for 1 second after only this step and continues exceution normally
+    Click Link  id:nav_camper
+    Input Text  id:engineperformance  1.5BHP
+    Select Radio Button  Right Hand Drive  No
+    Click Element  xpath://label[normalize-space()='No']
+    Close Browser
+```
+
+### Set/Get Selenium timeout:
+
+We can set explicit timeout for element visibility. Default is 5 seconds
+
+```
+set selenium timeout  5 seconds
+get selenium timeout
+```
+
+### Implicit wait:
+
+```
+set selenium implicitly wait
+```
+
+### Take screenshot:
+
+```
+Capture Page Screenshot  <screenshot path> //To capture full page screenshot and save it in the provided path. Path can be absolute or relative to Project dir
+Capture Element Screenshot  <locator>  <Screenshot path> //To capture screenshot of particular element
+```
+
+Note: ***The screenshot is captured only till the part visible on screen***
+
+```
+Close All Browsers - Closes all the browsers opened by Robot framework script
+```
+
+### Browser related keywords:
+
+Go To - To open a different URL\
+Go Back - To navigate back i.e. click Back button on the browser\
+Get Location - To get the URL that is currently open
+
+```
+*** Variables ***
+${Browser}  Chrome
+${URL}  https://thetestingworld.com/testings/
+
+*** Test Cases ***
+TC_OO1_BROWSER_START_AND_CLOSE
+    Open Browser  ${URL}  ${Browser}
+    Go To  https://www.google.com
+    ${URL1}=    Get Location            // Gets Currently open URL
+    Go Back                             //Navigates back to original URL
+```
+
+### Execute Javascript at runtime:
+
+***Execute Javascript*** keyword is used to perform javascript actions on browser. Below is an example to scroll the browser window using javascript
+
+```
+    Execute Javascript  window.scrollTo(0,1000)     // Scroll values in pixels
+```
+
+### Mouse actions:
+
+Open Context Menu - Open context menu i.e. right click but takes locator as argument to right click on\
+Double Click Element - Double clicks on the element by taking element locator as argument\
+Mouse Down - Clicks mouse down button on the element locator argument provided\
+Mouse Up - Clicks mouse up button on the element locator argument provided\
+Mouse Over - Hovers the mouse pointer on the element with provided argument locator\
+
+```
+    Open Context Menu    xpath://span[contains(text(),'VIDEOS')]
+    Double Click Element    xpath://a[text(),'Login']
+    Mouse Down    xpath://a[text(),'Login']
+    Mouse Up    xpath://a[text(),'Login']
+    Mouse Over    xpath://a[text(),'Login']
+```
+
+### Keyboard operations:
+
+Used to enter non-alpha numeric keys
+***Press Key*** is used to enter keys
+
+For Alpha numeric characters, we can directly use them. But for non text characters, we need to use ASCII value
+When using ascii value, we need to give \\ before the value
+
+```
+    Press Key    xpath://input    hello
+    Press Key    xpath://button    \\13
+```
+
+### Wait commands:
+
+Wait commands can be used to wait till some condition is met. Some basic ones are
+
+Wait Until Page Contains -              Waits until some text is displayed on the browser\
+Wait Until Page Contains Element -      Waits until some element is loaded on the browser\
+Wait Until Element Contains -           Waits until the given element contains some text\
+Wait Until Element Visible -            Waits until given element is visible\
+Wait Until Element Enable -             Waits until given element is enabled
+
+Default timeout for these waits is 5 seconds. We can override this by using ***Set Selenium Timeout*** keyword
