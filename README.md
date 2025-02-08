@@ -121,12 +121,12 @@ Reference - https://robotframework.org/SeleniumLibrary/SeleniumLibrary.html
 
 Generic syntax for any Robot statement is
 
-<Keyword>  <arg1>  <arg2>
+\<Keyword>  \<arg1>     \<arg2>
 
 There should be 2 spaces between keyword and arg, arg and arg.
 Most of the keywords are more than 1 word. Below are the most commonly used keywords in Selenium library.
 
-Locator syntax is slightly different than what we usually use.\
+Locator syntax is slightly different from what we usually use.\
 It is like \<attribute>:\<value>
 
 Example:
@@ -327,8 +327,8 @@ TC_OO1_BROWSER_START_AND_CLOSE
 
 ### Mouse actions:
 
-Open Context Menu - Open context menu i.e. right click but takes locator as argument to right click on\
-Double Click Element - Double clicks on the element by taking element locator as argument\
+Open Context Menu - Open context menu i.e. right click but takes locator as argument to right-click on\
+Double Click Element - Double-clicks on the element by taking element locator as argument\
 Mouse Down - Clicks mouse down button on the element locator argument provided\
 Mouse Up - Clicks mouse up button on the element locator argument provided\
 Mouse Over - Hovers the mouse pointer on the element with provided argument locator\
@@ -365,3 +365,99 @@ Wait Until Element Visible -            Waits until given element is visible\
 Wait Until Element Enable -             Waits until given element is enabled
 
 Default timeout for these waits is 5 seconds. We can override this by using ***Set Selenium Timeout*** keyword
+
+### Multi window handling:
+
+***Switch Browser*** keyword is used to switch between browsers and perform actions.
+
+We can switch between browsers using the index of the browser i.e. the order in which they are opened or using alias which was given to the browser when opening the browser.
+
+Here the index starts from 1.
+
+Note: ***It is not visually shown switching between windows on screen, but it happens***
+
+```
+    Open Browser  ${URL}  ${Browser}
+    Maximize Browser Window
+    Open Browser  https://www.google.com  ${Browser}  alias=google  //Browser started with alias
+    Maximize Browser Window
+    Switch Browser    1                                             // Index of the browser started 1st
+    ${var_url_1}=   Get Location
+    Log To Console    ${var_url_1}                                  // Prints first URL
+    Switch Browser    google                                        // Switches using alias
+    ${var_url_1}=   Get Location
+    Log To Console    ${var_url_1}                                  // Prints https://www.google.com
+```
+
+***Switch Window*** keyword is used for switching between tabs using either page title or URL
+
+```
+    Open Browser  ${URL}  ${Browser}
+    Maximize Browser Window
+    Click Element  //a[normalize-space()='creating test libraries']
+    Switch Window  Robot Framework
+    ${URL1}=    Get Location
+    Switch Window  Robot Framework User Guide
+    ${URL2}=    Get Location
+    Log To Console    ${URL1}
+    Log To Console    ${URL2}
+```
+
+Everytime, title might not be present or URL might be dynamic. In those scenarios, we use Window Handler to switch between tabs.
+
+## Validations
+
+---
+
+We can put validations on the page using multiple keywords available in Robot Framework
+
+### Page Should Contain & Page Should Not Contain:
+
+Do an assertion by checking if a certain text is present or not present based on context.
+
+This assertion is usually used to assert the page proper load.
+
+### Page Should Contain \<Element> & Page Should Not Contain \<Element>:
+
+This is also similar to above assertion but instead of text, we validate an element
+
+![img.png](ReadmeImages/img.png)
+
+### Checkbox validations:
+
+We can get the checkbox if checked or not by using below keywords
+
+Checkbox Should Be Selected  \<locator>
+Checkbox Should Not Be Selected  \<locator>
+
+### Element text validations:
+
+Below keywords can be used to validate the text for a given element
+
+```
+    element text should be  <locator>  <exact text>
+    element text should not be  <locator>  <exact text>
+    element should contain  <locator>  <exact text>
+    element should not contain  <locator>  <exact text>
+    
+```
+
+### Few more validations:
+
+To validate title
+
+``` Title should be <expected title>```
+
+To check if element is visible
+
+``` 
+Element should be visible  <locator> 
+Element should not be visible  <locator> 
+```
+
+To check if element is enabled
+
+``` 
+ELement should be enabled  <locator>
+ELement should be disabled  <locator> 
+```
