@@ -461,3 +461,359 @@ To check if element is enabled
 ELement should be enabled  <locator>
 ELement should be disabled  <locator> 
 ```
+
+## Creating resource files
+
+---
+
+Resource files are where we keep reusable data (keywords, variables etc..)
+
+### User defined keywords:
+
+UtilResources.robot
+
+```
+    *** Settings ***
+    Library  SeleniumLibrary
+
+    *** Variables ***
+    ${Browser}  Chrome
+    ${URL}  https://thetestingworld.com/testings/
+
+    *** Keywords ***
+    Start Browser and Maximize
+        Open Browser  ${URL}  ${Browser}
+        Maximize Browser Window
+```
+
+Testcase.robot
+
+```
+*** Settings ***
+Library  SeleniumLibrary
+Resource  ../resources/UtilsResources.robot     // Created resouce file is imported here
+
+*** Variables ***
+
+*** Test Cases ***
+TC_005_resources
+    Start Browser and Maximize
+    Input Text  name:fld_username  Hello world
+
+```
+
+### User defined keywords with arguments:
+
+Resource.robot
+
+```
+*** Settings ***
+Library  SeleniumLibrary
+
+*** Variables ***
+${Browser}  Chrome
+${URL}  https://thetestingworld.com/testings/
+
+*** Keywords ***
+Start Browser and Maximize
+    Open Browser  ${URL}  ${Browser}
+    Maximize Browser Window
+
+Enter Details
+    [Arguments]  ${userName}  ${email}  ${password}
+    Input Text  name:fld_username  ${userName}
+    Input Text  name:fld_email  ${email}
+    Input Text  name:fld_password  ${password}
+```
+
+Testcase.robot:
+
+```
+*** Settings ***
+Resource  ../resources/UtilsResources.robot
+
+*** Variables ***
+
+*** Test Cases ***
+TC_005_resources
+    Start Browser and Maximize
+    Enter Details  testing  testing@xyz.com  abc123xyz
+
+```
+
+### Return value from user defined keyword:
+
+To return a value from the keyword, we need to use [Return] (in the square brackets)
+
+Resource.robot
+
+```
+*** Settings ***
+Library  SeleniumLibrary
+
+*** Variables ***
+${Browser}  Chrome
+${URL}  https://thetestingworld.com/testings/
+
+*** Keywords ***
+Start Browser and Maximize
+    Open Browser  ${URL}  ${Browser}
+    Maximize Browser Window
+    ${title}=   Get Title
+    Log To Console    ${title}
+    [Return]  ${title}
+
+Enter Details
+    [Arguments]  ${userName}  ${email}  ${password}
+    Input Text  name:fld_username  ${userName}
+    Input Text  name:fld_email  ${email}
+    Input Text  name:fld_password  ${password}
+```
+
+Testcase.robot:
+
+```
+*** Settings ***
+Resource  ../resources/UtilsResources.robot
+
+*** Variables ***
+
+*** Test Cases ***
+TC_005_resources
+    ${Res}=  Start Browser and Maximize
+    Log To Console    ${Res}
+    Enter Details  testing  testing@xyz.com  abc123xyz
+
+```
+
+## Adding details to testcase
+
+---
+
+### Adding documentation:
+
+We can use [Documentation] keyword to write more info about testcase or keyword
+
+We can add Documentation to the robot file with keyword Documentation (without square brackets)
+
+```
+*** Settings ***
+Resource  ../resources/UtilsResources.robot
+Documentation  This is learning suite
+*** Variables ***
+
+*** Test Cases ***
+TC_005_resources
+    [Documentation]  Testing the user defined keywords
+    ${Res}=  Start Browser and Maximize
+    Log To Console    ${Res}
+    Enter Details  testing  testing@xyz.com  abc123xyz
+
+```
+
+### Timeout:
+
+Used to define timeout for the testcase. Keyword [Timeout] is used\
+If the testcase is not finished within the timeout provided, it will be failed with reason timeout exceeded
+
+```
+*** Settings ***
+Resource  ../resources/UtilsResources.robot
+Documentation  This is learning suite
+*** Variables ***
+
+*** Test Cases ***
+TC_005_resources
+    [Documentation]  Testing the user defined keywords
+    [Timeout]  2mins 8s  Failed to execute on time          // Second argument is message to be shown if timeout occurred
+    ${Res}=  Start Browser and Maximize
+    Log To Console    ${Res}
+    Enter Details  testing  testing@xyz.com  abc123xyz
+
+```
+
+Timeout can be defined at keyword level also in the same way as above
+
+We can add timeout globally for testcases in the settings level
+
+```test timeout 10s```
+
+### Setup & Teardown:
+
+We can have setup and teardown at testcase and testsuite level
+
+We can use keywords [Setup] and [Teardown] to call the user defined/inbuilt keywords as setup and teardown at testcase level. Below is the example.
+
+Resource.robot
+
+```
+*** Settings ***
+Library  SeleniumLibrary
+
+*** Variables ***
+${Browser}  Chrome
+${URL}  https://thetestingworld.com/testings/
+
+*** Keywords ***
+Start Browser and Maximize
+    [Documentation]  This keyword opens and maximizes the browser
+    Open Browser  ${URL}  ${Browser}
+    Maximize Browser Window
+
+Close Browser Window
+    ${title}=   Get Title
+    Log To Console    ${title}
+    Close Browser
+
+Enter Details
+    [Arguments]  ${userName}  ${email}  ${password}
+    Input Text  name:fld_username  ${userName}
+    Input Text  name:fld_email  ${email}
+    Input Text  name:fld_password  ${password}
+```
+
+Testcase.robot
+
+```
+*** Settings ***
+Resource  ../resources/UtilsResources.robot
+Documentation  This is learning suite
+*** Variables ***
+
+*** Test Cases ***
+TC_005_resources
+    [Documentation]  Testing the user defined keywords
+    [Setup]  Start Browser and Maximize                     //Keyword defined in resource file
+    [Teardown]  Close Browser Window                        //Keyword defined in resource file
+    Enter Details  testing  testing@xyz.com  abc123xyz
+```
+
+The Setup and Teardown defined in the testcase is applicable only for the testcase only
+
+To define setup and teardown at a file or suite level, please check below example
+
+```
+*** Settings ***
+Resource  ../resources/UtilsResources.robot
+Documentation  This is learning suite
+Test Setup  Start Browser and Maximize  //Runs before each testcase
+Test Teardown  Close Browser Window     // Runs after each testcase
+*** Variables ***
+
+*** Test Cases ***
+TC_005_resources
+    [Documentation]  Testing the user defined keywords
+    Enter Details  testing  testing@xyz.com  abc123xyz
+```
+
+## Test suites
+
+---
+
+Each Robot file/folder/sub-folder can behave as testsuite
+
+Consider below folder structure
+<pre>
+One
+    ├───Three
+    │       TC_006_Setup_Teardown_Testcase.robot
+    │       TC_007_Setup_Teardown_TestcaseGlobal.robot
+    │
+    └───Two
+            TC_005_Resources.robot
+</pre>
+Here folder One has 2 subfolders Two and Three. Inturn each subfolder has one or more robot files with testcases
+
+We can run tests at multiple levels here. We can run single robot file using below command
+
+robot TC_005_Resources.robot
+
+We can run all robot files in a given folder
+
+robot Three  //Runs 2 robot files
+
+We can run the folder which has subfolders also
+
+robot One       //Runs all 3 robot files
+
+## Before and After suite
+
+---
+
+We can use ***Suite Setup*** and ***Suite Teardown*** to define the keywords to run at a file level
+
+To define setup, teardown, variables at a folder level, we need to define them in a __init__.robot file
+
+## Tags & Control execution using tags
+
+---
+
+Tags can be used to group the related testsuites files
+
+We can add tags at testcase level using [Tags] keyword.
+
+```
+*** Settings ***
+Resource  ../../../resources/UtilsResources.robot
+Documentation  This is learning suite
+
+*** Variables ***
+
+*** Test Cases ***
+TC_005_resources
+    [Documentation]  Testing the user defined keywords
+    [Tags]  smoke
+    ${Res}=  Start Browser and Maximize
+    Log To Console    ${Res}
+    Enter Details  testing  testing@xyz.com  abc123xyz
+
+Selecting checkbox
+    [Tags]  smoke  sanity
+    Select Radio Button    add_type    office
+
+```
+
+We can run testcases of a specific tag using below command
+
+```robot -i <tag> <file>```
+
+When it is run at a folder level, the test cases across files with given tag only will be applied
+
+### Default and Forced Tags:
+
+Default Tags can be defined to be applied to all test case in a suitefile where the tag is not explicitly defined. We need to define it in Settings area with below keyword
+
+```default tags  <tag1> ....```
+
+Forced tags are also defined in the same way as default tags but the difference is this tag is applied to all testcases irrespective of it having a tag or not
+
+```force tags  <tag1> ....```
+
+Different options in robot run command are
+
+We can use logical operators OR, AND, NOT to combine tags
+
+robot -i \<tag1>AND\<tag2>  - Runs all testcases where the tags tag1 and tag2 are given
+
+Similar behavior for other operators also
+
+-i   - TO include specified tags\
+-e   - To exclude specified tags\
+-t   - Execute single testcase
+
+robot -t "testcase name" suitefile/folder
+
+-s  - Execute particular suite
+
+robot -s "SUite name"  suitefolder
+
+## Specify logs locations
+
+---
+
+-r - To specify report file path\
+-o - To specify output file path\
+-l - To specify log file
+
+robot -o output/output.xml -r reports/report.html -l logs/log.html suite
+
