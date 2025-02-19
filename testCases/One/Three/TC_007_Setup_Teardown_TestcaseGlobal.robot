@@ -12,5 +12,7 @@ TC_005_resources
     Enter Details  testing  testing@xyz.com  abc123xyz
     ${today}=   Get Current Date
     ${parsedDate}=  Convert Date    ${today}  result_format=%Y%m%d%H%M
+    ${name}=    Catenate  SEPARATOR=  CaseApp  ${parsedDate}
     Log To Console    ${today}
     Log To Console    ${parsedDate}
+    Log To Console   ${name}

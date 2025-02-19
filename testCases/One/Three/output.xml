@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.2 (Python 3.13.1 on win32)" generated="2025-02-11T23:33:20.632161" rpa="false" schemaversion="5">
+<suite id="s1" name="TC 007 Setup Teardown TestcaseGlobal" source="D:\Learning\Projects\Automation\RobotFrameworkSelenium\testCases\One\Three\TC_007_Setup_Teardown_TestcaseGlobal.robot">
+<test id="s1-t1" name="TC_005_resources" line="10">
+<kw name="Start Browser and Maximize" owner="UtilsResources" type="SETUP">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2025-02-11T23:33:20.964550" level="INFO">Opening browser 'Chrome' to base url 'https://thetestingworld.com/testings/'.</msg>
+<arg>${URL}</arg>
+<arg>${Browser}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2025-02-11T23:33:20.964237" elapsed="4.033772"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2025-02-11T23:33:24.998437" elapsed="0.084854"/>
+</kw>
+<doc>This keyword opens and maximizes the browser</doc>
+<status status="PASS" start="2025-02-11T23:33:20.963458" elapsed="4.120069"/>
+</kw>
+<kw name="Enter Details" owner="UtilsResources">
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-02-11T23:33:25.085812" level="INFO">Typing text 'testing' into text field 'name:fld_username'.</msg>
+<arg>name:fld_username</arg>
+<arg>${userName}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-02-11T23:33:25.085264" elapsed="0.310450"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-02-11T23:33:25.396288" level="INFO">Typing text 'testing@xyz.com' into text field 'name:fld_email'.</msg>
+<arg>name:fld_email</arg>
+<arg>${email}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-02-11T23:33:25.395966" elapsed="0.242619"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-02-11T23:33:25.639140" level="INFO">Typing text 'abc123xyz' into text field 'name:fld_password'.</msg>
+<arg>name:fld_password</arg>
+<arg>${password}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-02-11T23:33:25.638835" elapsed="0.264794"/>
+</kw>
+<arg>testing</arg>
+<arg>testing@xyz.com</arg>
+<arg>abc123xyz</arg>
+<status status="PASS" start="2025-02-11T23:33:25.084671" elapsed="0.819316"/>
+</kw>
+<kw name="Get Current Date" owner="DateTime">
+<msg time="2025-02-11T23:33:25.905445" level="INFO">${today} = 2025-02-11 23:33:25.905</msg>
+<var>${today}</var>
+<doc>Returns current local or UTC time with an optional increment.</doc>
+<status status="PASS" start="2025-02-11T23:33:25.904808" elapsed="0.000723"/>
+</kw>
+<kw name="Convert Date" owner="DateTime">
+<msg time="2025-02-11T23:33:25.914814" level="INFO">${parsedDate} = 202502112333</msg>
+<var>${parsedDate}</var>
+<arg>${today}</arg>
+<arg>result_format=%Y%m%d%H%M</arg>
+<doc>Converts between supported `date formats`.</doc>
+<status status="PASS" start="2025-02-11T23:33:25.906097" elapsed="0.008829"/>
+</kw>
+<kw name="Catenate" owner="BuiltIn">
+<msg time="2025-02-11T23:33:25.916279" level="INFO">${name} = CaseApp202502112333</msg>
+<var>${name}</var>
+<arg>SEPARATOR=</arg>
+<arg>CaseApp</arg>
+<arg>${parsedDate}</arg>
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<status status="PASS" start="2025-02-11T23:33:25.915731" elapsed="0.000625"/>
+</kw>
+<kw name="Catenate" owner="BuiltIn">
+<msg time="2025-02-11T23:33:25.917350" level="INFO">${newName} = CaseAppConvert DateGet Current Dateresult_format=%Y%m%d%H%M</msg>
+<var>${newName}</var>
+<arg>SEPARATOR=</arg>
+<arg>CaseApp</arg>
+<arg>Convert Date</arg>
+<arg>Get Current Date</arg>
+<arg>result_format=%Y%m%d%H%M</arg>
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<status status="PASS" start="2025-02-11T23:33:25.916932" elapsed="0.000496"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>${today}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-02-11T23:33:25.917907" elapsed="0.000627"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>${parsedDate}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-02-11T23:33:25.918892" elapsed="0.000510"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>${name}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-02-11T23:33:25.919749" elapsed="0.000440"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>${newName}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-02-11T23:33:25.920949" elapsed="0.000658"/>
+</kw>
+<kw name="Close Browser Window" owner="UtilsResources" type="TEARDOWN">
+<kw name="Get Title" owner="SeleniumLibrary">
+<msg time="2025-02-11T23:33:25.933451" level="INFO">${title} = Login &amp; Sign Up Forms</msg>
+<var>${title}</var>
+<doc>Returns the title of the current page.</doc>
+<status status="PASS" start="2025-02-11T23:33:25.923125" elapsed="0.010447"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>${title}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-02-11T23:33:25.933969" elapsed="0.000757"/>
+</kw>
+<kw name="Close Browser" owner="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-02-11T23:33:25.935028" elapsed="2.340108"/>
+</kw>
+<status status="PASS" start="2025-02-11T23:33:25.922400" elapsed="2.353056"/>
+</kw>
+<doc>Testing the user defined keywords</doc>
+<status status="PASS" start="2025-02-11T23:33:20.962451" elapsed="7.316124"/>
+</test>
+<doc>This is learning suite. Setup and teardown runs before each testcase</doc>
+<status status="PASS" start="2025-02-11T23:33:20.635545" elapsed="7.645406"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="TC 007 Setup Teardown TestcaseGlobal" id="s1" pass="1" fail="0" skip="0">TC 007 Setup Teardown TestcaseGlobal</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
