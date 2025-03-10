@@ -34,3 +34,10 @@ while i<=10:
 while i>=0:
     print(i)
     i-=1
+    if i == 5 :
+        break
+
+for i in range (1,11):
+    if (6*i)%10 == 0:
+        continue
+    print(6*i)

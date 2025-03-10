@@ -210,3 +210,149 @@ while i>=0:
     print(i)
     i-=1
 ```
+
+### Break statement:
+
+Come out of the loop at any given condition
+
+```python
+while i>=0:
+    print(i)
+    i-=1
+    if i == 5 :
+        break       # exits the loop when i is 5
+```
+
+### Continue statement:
+
+Skip the remaining part of the loop for a iteration when condition is met
+
+```python
+for i in range (1,11):
+    if (6*i)%10 == 0:
+        continue            #skips print statement when 6*i is multiple of 10
+    print(6*i)
+```
+
+### Else in loops:
+
+Else can be used with loops to execute a block of code after the loop is ended
+
+
+```python
+for i in range (1,11):
+    if (6*i)%10 == 0:
+        continue            #skips print statement when 6*i is multiple of 10
+    print(6*i)
+else:
+    print("Loop ended")
+```
+
+## Strings
+
+---
+
+We can define strings in multiple ways
+
+```python
+t1='Hello'
+t2="Hi"
+t3='''
+    Multi
+    Line
+    String
+    '''
+```
+
+If we want to concatenate strings, we can use +
+
+If we want to repeat a string multiple times, we can use *
+
+```python
+t1='Hello'
+t2="Hi"*3
+t3='''Multi
+Line
+String'''
+print(t1)
+print(t2)
+print(t3)
+```
+
+### Substring:
+
+Any string is internally converted to array of characters. We can directly access the characters using the index of the char
+
+```python
+message='hello'
+print(message[4]) # prints o. it is 0 indexed
+```
+
+Substrings can be fetched in multiple ways
+
+```python
+address = "Hyderabad"
+
+print(address[0:4]) # end index is excluded
+
+print(address[3:]) # Only start index till end
+
+print(address[:6]) # STart to end index excluded
+```
+
+Commonly used string functions
+
+```python
+t1='Hello'
+t2="Hi"*3
+t3='''Multi
+Line
+String'''
+print(t1)
+print(t2)
+print(t3)
+
+address = "Hyderabad"
+
+lower = 'abhgi'
+
+upper = 'AHSJS'
+
+print(address[0:4]) # end index is excluded
+
+print(address[3:]) # Only start index till end
+
+print(address[:6]) # STart to end index excluded
+
+print(len(address)) # prints length of string
+print(lower.capitalize()) # Capitalize the first char of the string
+print(upper.lower()) # Convert string to lower case
+print(lower.upper()) # Convert String to upper case
+```
+
+lstrip - remove leading spaces\
+rstrip - remove trailing spaces\
+strip - removes leading and trailing spaces
+
+```python
+space='   Hello world   '
+print(len(space))
+print(space.lstrip())
+print(space.rstrip())
+print(space.strip())
+```
+
+replace - replace a part of string with given string\
+split - Split with the delimiter provided\
+find - find the lowest index of occurrences of a pattern
+
+List:
+
+- List can hold multiple data of different data types\
+- List is defined in square brackets
+
+List items are zero indexed
+
+
+
+
