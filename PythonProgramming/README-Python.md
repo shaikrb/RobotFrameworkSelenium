@@ -346,13 +346,94 @@ replace - replace a part of string with given string\
 split - Split with the delimiter provided\
 find - find the lowest index of occurrences of a pattern
 
-List:
+<u>List:</u>
 
 - List can hold multiple data of different data types\
 - List is defined in square brackets
 
 List items are zero indexed
 
+<h2>Tuple:</h2>
 
+- Tuples are also similar to list.
+- Placed in () separated by ,
+- We cannot increase or decrease the size of tuple
+- We cannot change any value of tuple
 
+```python
+tuple1 = (1,"Hello",23.45)
+print(tuple1[1])
+tuple2=(1,1,2,4,1)
+print(tuple2.count(1))  #Give the count of number of occurrences of the given element
+print(tuple2.index(2))  # Gives the first index of the value
+print(tuple2.index(1))
+#print(tuple2.index(3))
 
+print(tuple1+tuple2) # Concatenates 2 tuples
+```
+
+<h2>Dictionary</h2>
+
+- Values are stored as Key:Value pairs
+- Key and value can be of any datatype
+- Keys must be always unique
+- If we define a new value with same key, the old value will be overridden
+
+Common methods
+
+keys - returns the list of all keys\
+values - returns all the values\
+items - returns all keys and values\
+len - returns length of dictionary
+
+## Functions
+
+---
+
+```python
+def testing():
+    print("Hello")
+    print('World')
+
+testing()
+```
+
+Functions can take arguments as input and return an output
+
+```python
+def testing():
+    print("Hello")
+    print('World')
+
+def multiply(a, b):
+    return a*b
+
+def add(a, b):
+    return a+b
+
+testing()
+print(add(multiply(10,3),5))
+```
+
+Different types of arguments:
+- Required arguments
+- Keyword arguments
+- Default arguments
+
+```python
+
+def testing():
+    print("Hello")
+    print('World')
+
+def multiply(a, b):
+    return a*b
+
+def add(a, b=10): #We can define default value of arguments in the function def. We cannot have non-default arguments following the default arguments
+    return a+b
+
+testing()
+print(add(multiply(10,3),5))
+print(add(50))
+print(add(b=100,a=90))  #You can pass arguments in any order when you map it to argument
+```
