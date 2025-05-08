@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.2 (Python 3.13.1 on win32)" generated="2025-05-08T21:34:56.335947" rpa="false" schemaversion="5">
+<suite id="s1" name="ExternalKeywords" source="D:\Learning\Projects\Automation\RobotFrameworkSelenium\testCases\ExternalKeywords.robot">
+<test id="s1-t1" name="Concatenate Strings" line="12">
+<kw name="Concat Strings" owner="UserKeywords">
+<msg time="2025-05-08T21:34:56.920699" level="INFO">${result} = Hello World</msg>
+<var>${result}</var>
+<arg>Hello</arg>
+<arg>World</arg>
+<status status="PASS" start="2025-05-08T21:34:56.920189" elapsed="0.017996"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-05-08T21:34:56.939490" level="INFO">Hello World</msg>
+<arg>${result}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-05-08T21:34:56.938824" elapsed="0.000974"/>
+</kw>
+<status status="PASS" start="2025-05-08T21:34:56.918771" elapsed="0.021418"/>
+</test>
+<status status="PASS" start="2025-05-08T21:34:56.381277" elapsed="0.562043"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="ExternalKeywords" id="s1" pass="1" fail="0" skip="0">ExternalKeywords</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

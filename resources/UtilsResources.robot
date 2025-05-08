@@ -1,5 +1,6 @@
 *** Settings ***
 Library  SeleniumLibrary
+Library  ../ExternalKeywords/UserKeywords.py
 
 *** Variables ***
 ${Browser}  Chrome
@@ -21,3 +22,6 @@ Enter Details
     Input Text  name:fld_username  ${userName}
     Input Text  name:fld_email  ${email}
     Input Text  name:fld_password  ${password}
+
+Create Folder at runtime
+    Create Folder

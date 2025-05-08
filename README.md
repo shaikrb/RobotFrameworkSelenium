@@ -805,7 +805,7 @@ robot -t "testcase name" suitefile/folder
 
 -s  - Execute particular suite
 
-robot -s "SUite name"  suitefolder
+robot -s "Suite name"  suitefolder
 
 ## Specify logs locations
 
@@ -816,4 +816,78 @@ robot -s "SUite name"  suitefolder
 -l - To specify log file
 
 robot -o output/output.xml -r reports/report.html -l logs/log.html suite
+
+## Fetch values at runtime
+
+Both built in and external libraries like Selenium provide keywords to get the data from either execution or web elements
+
+Below example shows the different keywords available
+
+```robotframework
+*** Test Cases ***
+Robot Fetch data of Web elements
+    Open Browser  ${Url}  ${Browser}
+    Maximize Browser Window
+    ${PageTitle}=  Get Title
+    Log    ${PageTitle}
+    ${Speed}=  Get Selenium Speed
+    Log    ${Speed}
+    ${Value}=  Get Value    xpath://input[@type='submit']
+    Log    ${Value}
+    ${Text}=  Get Text    xpath://a[@class='displayPopup']
+    Log    ${Text}
+    Select From List By Index    name:sex   1
+    ${SelectedIndex}=   Get Selected List Value    name:sex
+    Log    ${SelectedIndex}
+    ${SelectedValue}=   Get Selected List Label    name:sex
+    Log    ${SelectedValue}
+    ${AllLabels}=   Get List Items    name:sex
+    Log    ${AllLabels}
+    ${ActualUrl}=   Get Location    #Gets the URL of open page
+    Log    ${ActualUrl}
+    ${Source}=  Get Source      #Gets the full HTML source of open page
+    Log    ${Source}
+    ${Attr}=    Get Element Attribute    name:state    class
+    Log    ${Attr}
+    ${EleCount}=    Get Element Count    class:field
+    Log    ${EleCount}
+```
+
+## User defined Keywords using Python
+
+We can write Python methods and use them as keywords. Some simple example is like below
+
+```python
+import os
+
+def create_folder():
+    os.mkdir("D:\\Temp")
+
+def create_folder_with_name(folderName):
+    os.mkdir("D:\\"+folderName)
+
+def concat_strings(str1, str2):
+    return str1+" "+str2
+```
+
+```robotframework
+# Created by sara at 08-05-2025
+*** Settings ***
+Resource    ../resources/UtilsResources.robot
+Library     ../ExternalKeywords/UserKeywords.py
+
+*** Keywords ***
+
+*** Test Cases ***
+Create Folder in FS
+    Create Folder With Name  Temp
+
+Concatenate Strings
+    ${result}=  Concat Strings  Hello  World
+    Log  ${result}
+```
+
+Here the keyword will be the Captialized of method name
+
+create_folder_with_name  --> Create Folder With Name
 
