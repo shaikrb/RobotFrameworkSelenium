@@ -437,3 +437,48 @@ print(add(multiply(10,3),5))
 print(add(50))
 print(add(b=100,a=90))  #You can pass arguments in any order when you map it to argument
 ```
+
+## Classes
+
+Python is OOP language\
+We can put our methods, variables in the classes
+
+It is not mandatory for the filename and classname to match\
+We can access the class members (variables and functions) using object reference
+
+```python
+class A:
+
+    def welcome(self):
+        print("This is a class")
+
+obj=A()
+obj.welcome()
+```
+
+First argument of any function would be 'self' and it will be auto set
+
+### Constructors
+
+Constructors are used as initializers
+
+The name of constructor is always '\__init()__' and the first argument is always self
+
+This is automatically called when the object is created for the class
+
+It can have other arguments but not mandatory
+
+Constructors do not return any value
+
+```python
+class A:
+    def __init__(self):
+        print('This is constructor')
+    def welcome(self):
+        print("This is a class")
+
+obj=A()
+obj.welcome()
+```
+
+In the above code, the code in \_\_init__ is called i.e. This is constructor is printed first
