@@ -481,4 +481,37 @@ obj=A()
 obj.welcome()
 ```
 
-In the above code, the code in \_\_init__ is called i.e. This is constructor is printed first
+In the above code, the code in \_\_init__ is called i.e. `This is constructor` is printed first
+
+When we import modules using only import keyword, we need to specify module name also when accessing its members
+
+But when we import using from \<module> import, we can directly access
+
+## Exception handling
+
+Exception handling in python is done using try, except, else and finally keywords
+
+- try Block: try block lets us test a block of code for errors. Python will "try" to execute the code in this block. If an exception occurs, execution will immediately jump to the except block.
+
+- except Block: except block enables us to handle the error or exception. If the code inside the try block throws an error, Python jumps to the except block and executes it. We can handle specific exceptions or use a general except to catch all exceptions.
+
+- else Block: else block is optional and if included, must follow all except blocks. The else block runs only if no exceptions are raised in the try block. This is useful for code that should execute if the try block succeeds.
+
+- finally Block: finally block always runs, regardless of whether an exception occurred or not. It is typically used for cleanup operations (closing files, releasing resources).
+
+```python
+try:
+    user_input_1 = input("Enter first number: ")
+    user_input_2 = input("Enter second number: ")
+    c = int(user_input_1) + int(user_input_2)
+except ValueError as e:         # Block is executed when ValueError is occurred
+    print("Error", e)           
+    print("Your input is incorrect")
+else:
+    print(c)        #Executes when no exception is occurred
+finally:
+    print("Thanks") #Executed irrespective of exception occurred or not
+
+
+```
+
